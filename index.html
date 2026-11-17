@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca TIC | Campus Digital</title>
+
+<style>
+:root {
+  --bg:#07151e;
+  --panel:#102632;
+  --turquoise:#42e6d0;
+  --blue:#3d9dcb;
+  --purple:#9b82ed;
+  --white:#edfafa;
+  --muted:#a4bac4;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:var(--white);
+}
+a{color:inherit}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+
+header{
+  background:
+    radial-gradient(circle at 80% 20%,#704f9c55,transparent 30%),
+    radial-gradient(circle at 20% 80%,#22cdbb33,transparent 35%),
+    linear-gradient(125deg,#09232d,#102e45,#202044);
+  padding:22px 7%;
+  border-bottom:1px solid #42e6d033;
+}
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:18px;
+}
+.logo{
+  color:var(--turquoise);
+  font-size:22px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+.nav-links{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+}
+.nav-links a{
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+}
+.nav-links a:hover{color:var(--turquoise)}
+
+.hero{
+  min-height:380px;
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  align-items:center;
+  gap:25px;
+  padding:65px 0;
+}
+.eyebrow{
+  color:var(--turquoise);
+  letter-spacing:3px;
+  text-transform:uppercase;
+  font-size:12px;
+  font-weight:bold;
+}
+.hero h1{
+  font-size:clamp(38px,6vw,65px);
+  line-height:1.08;
+  margin:16px 0;
+}
+.hero h1 span{color:var(--turquoise)}
+.hero p{
+  color:#c1d4db;
+  line-height:1.8;
+  max-width:580px;
+}
+.btn{
+  display:inline-block;
+  border:0;
+  border-radius:9px;
+  padding:13px 20px;
+  background:var(--turquoise);
+  color:#06232a;
+  font-weight:bold;
+  text-decoration:none;
+  margin-top:12px;
+  transition:.2s;
+}
+.btn:hover{transform:translateY(-3px);background:#8bfff0}
+
+.hero-art{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  min-height:250px;
+}
+.orbit{
+  width:225px;
+  height:225px;
+  border:1px solid #42e6d099;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 0 60px #42e6d022;
+  animation:float 5s ease-in-out infinite;
+}
+.orbit-inner{
+  width:160px;
+  height:160px;
+  border-radius:35px;
+  background:linear-gradient(140deg,#42e6d044,#9b82ed55);
+  border:1px solid #8ef8e8a0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:75px;
+  backdrop-filter:blur(15px);
+}
+.bubble{
+  position:absolute;
+  background:#102d3bdd;
+  border:1px solid #42e6d077;
+  padding:12px;
+  border-radius:12px;
+  color:var(--turquoise);
+  font-size:13px;
+}
+.bubble.one{top:15px;left:0}
+.bubble.two{bottom:15px;right:0}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-13px)}
+}
+
+main{
+  max-width:1200px;
+  margin:auto;
+  padding:35px 22px;
+}
+.section-title{
+  font-size:27px;
+  margin:0 0 10px;
+}
+.section-desc{
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:25px;
+}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-bottom:40px;
+}
+.stat{
+  background:var(--panel);
+  border:1px solid #42e6d033;
+  border-radius:14px;
+  padding:20px;
+}
+.stat strong{
+  display:block;
+  font-size:28px;
+  color:var(--turquoise);
+  margin-bottom:7px;
+}
+.stat span{color:var(--muted);font-size:13px}
+
+.glass{
+  background:linear-gradient(145deg,#173442dd,#10232edd);
+  border:1px solid #74dcca44;
+  border-radius:17px;
+  padding:23px;
+  box-shadow:0 12px 35px #00000022;
+  margin-bottom:28px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(235px,1fr));
+  gap:17px;
+}
+.card{
+  background:var(--panel);
+  border:1px solid #4ce0d133;
+  border-radius:15px;
+  padding:20px;
+  transition:.25s;
+  display:flex;
+  flex-direction:column;
+  min-height:225px;
+}
+.card:hover{
+  transform:translateY(-5px);
+  border-color:var(--turquoise);
+  box-shadow:0 10px 30px #42e6d022;
+}
+.card-icon{font-size:32px;margin-bottom:14px}
+.tag{
+  color:var(--turquoise);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.card h3{margin:10px 0}
+.card p{
+  color:var(--muted);
+  line-height:1.6;
+  font-size:14px;
+  flex:1;
+}
+.card a{
+  color:var(--turquoise);
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+}
+.card a:hover{text-decoration:underline}
+.card-actions{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.delete{
+  background:#71353c;
+  color:white;
+  border:0;
+  border-radius:7px;
+  padding:8px 10px;
+}
+.search-row{
+  display:grid;
+  grid-template-columns:1fr 230px;
+  gap:12px;
+}
+input,select,textarea{
+  width:100%;
+  padding:14px;
+  background:#071b26;
+  border:1px solid #42606c;
+  border-radius:9px;
+  color:white;
+  outline:none;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--turquoise);
+}
+label{
+  display:block;
+  margin:15px 0 7px;
+  color:#cce3e8;
+  font-size:14px;
+}
+textarea{resize:vertical;min-height:90px}
+form button{width:100%;margin-top:18px}
+.message{
+  color:var(--turquoise);
+  margin-top:12px;
+  min-height:20px;
+}
+.empty{
+  color:var(--muted);
+  padding:20px;
+  text-align:center;
+}
+footer{
+  background:#091923;
+  border-top:1px solid #42e6d033;
+  text-align:center;
+  padding:30px 15px;
+  color:var(--muted);
+  line-height:1.8;
+}
+footer strong{color:var(--turquoise)}
+
+@media(max-width:700px){
+  header{padding:20px}
+  .hero{grid-template-columns:1fr;padding:40px 0}
+  .hero-art{min-height:240px}
+  .stats{grid-template-columns:1fr}
+  .search-row{grid-template-columns:1fr}
+  nav{justify-content:center}
+  .nav-links{justify-content:center;gap:13px}
+  .hero h1{font-size:43px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+  <div class="logo">◈ BIBLIOTECA TIC</div>
+  <div class="nav-links">
+    <a href="#inicio">Inicio</a>
+    <a href="#categorias">Categorías</a>
+    <a href="#recursos">Recursos</a>
+    <a href="#agregar">Agregar recurso</a>
+  </div>
+</nav>
+
+<section class="hero" id="inicio">
+  <div>
+    <div class="eyebrow">Campus digital universitario</div>
+    <h1>El conocimiento<br>está a un <span>clic.</span></h1>
+    <p>
+      Explora recursos académicos, aprende nuevas habilidades
+      y descubre herramientas para transformar tu futuro.
+      Tu espacio para aprender, investigar y crear.
+    </p>
+    <a class="btn" href="#recursos">Explorar biblioteca →</a>
+  </div>
+
+  <div class="hero-art">
+    <div class="bubble one">✦ APRENDE</div>
+    <div class="orbit">
+      <div class="orbit-inner">💻</div>
+    </div>
+    <div class="bubble two">◈ INNOVA</div>
+  </div>
+</section>
+</header>
+
+<main>
+
+<section class="stats">
+  <div class="stat">
+    <strong id="total">0</strong>
+    <span>Recursos disponibles</span>
+  </div>
+  <div class="stat">
+    <strong>04</strong>
+    <span>Áreas de aprendizaje</span>
+  </div>
+  <div class="stat">
+    <strong>24/7</strong>
+    <span>Acceso digital</span>
+  </div>
+</section>
+
+<section id="categorias">
+<h2 class="section-title">Áreas de conocimiento</h2>
+<p class="section-desc">
+Encuentra materiales según tus intereses académicos.
+</p>
+
+<div class="grid">
+  <article class="card">
+    <div class="card-icon">📐</div>
+    <h3>Matemáticas</h3>
+    <p>Cálculo, álgebra lineal, estadística y matemáticas discretas.</p>
+    <a href="#recursos" onclick="elegirCategoria('Matemáticas')">Explorar →</a>
+  </article>
+
+  <article class="card">
+    <div class="card-icon">💻</div>
+    <h3>Ingeniería de Sistemas</h3>
+    <p>Algoritmos, programación, bases de datos y desarrollo web.</p>
+    <a href="#recursos" onclick="elegirCategoria('Ingeniería de Sistemas')">Explorar →</a>
+  </article>
+
+  <article class="card">
+    <div class="card-icon">🎨</div>
+    <h3>Diseño digital</h3>
+    <p>Creatividad, presentaciones y herramientas digitales.</p>
+    <a href="#recursos" onclick="elegirCategoria('Diseño')">Explorar →</a>
+  </article>
+
+  <article class="card">
+    <div class="card-icon">📚</div>
+    <h3>Lecturas educativas</h3>
+    <p>Material académico, documentos y contenidos de estudio.</p>
+    <a href="#recursos" onclick="elegirCategoria('Lecturas')">Explorar →</a>
+  </article>
+</div>
+</section>
+
+<section id="recursos" style="margin-top:45px">
+<h2 class="section-title">Explorar biblioteca</h2>
+<p class="section-desc">
+Busca cursos, plataformas y herramientas educativas.
+</p>
+
+<div class="glass">
+  <div class="search-row">
+    <input id="busqueda" type="search"
+      placeholder="🔎 Buscar un recurso educativo..."
+      oninput="mostrarRecursos()">
+
+    <select id="filtro" onchange="mostrarRecursos()">
+      <option value="">Todas las categorías</option>
+      <option>Matemáticas</option>
+      <option>Ingeniería de Sistemas</option>
+      <option>Diseño</option>
+      <option>Lecturas</option>
+    </select>
+  </div>
+</div>
+
+<div class="grid" id="lista"></div>
+</section>
+
+<section id="agregar" style="margin-top:45px">
+<h2 class="section-title">Agregar un recurso educativo</h2>
+<p class="section-desc">
+Comparte herramientas y materiales que ayuden a otros estudiantes.
+</p>
+
+<div class="glass">
+<form id="formulario">
+
+  <label for="nombre">Nombre del recurso</label>
+  <input id="nombre" required maxlength="100"
+    placeholder="Ej. Curso de programación">
+
+  <label for="categoria">Categoría</label>
+  <select id="categoria" required>
+    <option value="">Seleccionar categoría</option>
+    <option>Matemáticas</option>
+    <option>Ingeniería de Sistemas</option>
+    <option>Diseño</option>
+    <option>Lecturas</option>
+  </select>
+
+  <label for="descripcion">Descripción</label>
+  <textarea id="descripcion" required maxlength="250"
+    placeholder="Describe qué ofrece el recurso"></textarea>
+
+  <label for="url">Enlace del recurso</label>
+  <input id="url" type="url" required
+    placeholder="https://ejemplo.com">
+
+  <button class="btn" type="submit">+ Guardar recurso</button>
+  <div class="message" id="mensaje" role="status"></div>
+</form>
+</div>
+</section>
+
+</main>
+
+<footer>
+<strong>◈ BIBLIOTECA TIC</strong>
+<p>Aprender · Investigar · Crear · Compartir</p>
+<small>Campus digital educativo © 2026</small>
+</footer>
+
+<script>
+const iniciales = [
+{
+ nombre:"Khan Academy",
+ categoria:"Matemáticas",
+ descripcion:"Aprende álgebra, cálculo, estadística y matemáticas.",
+ url:"https://es.khanacademy.org/math",
+ icono:"📐"
+},
+{
+ nombre:"MIT OpenCourseWare",
+ categoria:"Matemáticas",
+ descripcion:"Cursos y materiales académicos de nivel universitario.",
+ url:"https://ocw.mit.edu/",
+ icono:"🎓"
+},
+{
+ nombre:"Matemáticas discretas",
+ categoria:"Matemáticas",
+ descripcion:"Explora lógica, conjuntos, relaciones y estructuras discretas.",
+ url:"https://www.khanacademy.org/math",
+ icono:"🔢"
+},
+{
+ nombre:"freeCodeCamp",
+ categoria:"Ingeniería de Sistemas",
+ descripcion:"Aprende programación, JavaScript, Python y desarrollo web.",
+ url:"https://www.freecodecamp.org/espanol/",
+ icono:"💻"
+},
+{
+ nombre:"W3Schools",
+ categoria:"Ingeniería de Sistemas",
+ descripcion:"Tutoriales de HTML, CSS, JavaScript y bases de datos.",
+ url:"https://www.w3schools.com/",
+ icono:"⌨️"
+},
+{
+ nombre:"GitHub",
+ categoria:"Ingeniería de Sistemas",
+ descripcion:"Explora proyectos, repositorios y herramientas de programación.",
+ url:"https://github.com/",
+ icono:"🖥️"
+},
+{
+ nombre:"SQLBolt",
+ categoria:"Ingeniería de Sistemas",
+ descripcion:"Aprende SQL y fundamentos de bases de datos con ejercicios.",
+ url:"https://sqlbolt.com/",
+ icono:"🗄️"
+},
+{
+ nombre:"Canva",
+ categoria:"Diseño",
+ descripcion:"Crea presentaciones, infografías y diseños educativos.",
+ url:"https://www.canva.com/es_co/",
+ icono:"🎨"
+},
+{
+ nombre:"Colombia Aprende",
+ categoria:"Lecturas",
+ descripcion:"Consulta recursos y materiales educativos.",
+ url:"https://www.colombiaaprende.edu.co/",
+ icono:"📚"
+},
+{
+ nombre:"Google Académico",
+ categoria:"Lecturas",
+ descripcion:"Busca artículos científicos, investigaciones y publicaciones.",
+ url:"https://scholar.google.com/",
+ icono:"🔍"
+}
+];
+
+let personalizados = [];
+
+try {
+  const guardados = localStorage.getItem("bibliotecaTIC");
+  if (guardados) {
+    const datos = JSON.parse(guardados);
+    if (Array.isArray(datos)) personalizados = datos;
+  }
+} catch(e) {
+  personalizados = [];
+}
+
+let recursos = [...iniciales,...personalizados];
+
+function actualizarTotal(){
+  document.getElementById("total").textContent = recursos.length;
+}
+
+function elegirCategoria(categoria){
+  document.getElementById("filtro").value = categoria;
+  mostrarRecursos();
+}
+
+function mostrarRecursos(){
+  const lista = document.getElementById("lista");
+  const texto = document.getElementById("busqueda").value.toLowerCase().trim();
+  const categoria = document.getElementById("filtro").value;
+
+  const filtrados = recursos.filter(r =>
+    (r.nombre+" "+r.descripcion+" "+r.categoria)
+      .toLowerCase().includes(texto) &&
+    (!categoria || r.categoria === categoria)
+  );
+
+  lista.replaceChildren();
+
+  if(filtrados.length === 0){
+    const aviso = document.createElement("div");
+    aviso.className = "empty";
+    aviso.textContent = "No encontramos recursos con esa búsqueda.";
+    lista.appendChild(aviso);
+  }
+
+  filtrados.forEach(r => {
+    const tarjeta = document.createElement("article");
+    tarjeta.className = "card";
+
+    const icono = document.createElement("div");
+    icono.className = "card-icon";
+    icono.textContent = r.icono || "📘";
+
+    const etiqueta = document.createElement("span");
+    etiqueta.className = "tag";
+    etiqueta.textContent = r.categoria;
+
+    const titulo = document.createElement("h3");
+    titulo.textContent = r.nombre;
+
+    const descripcion = document.createElement("p");
+    descripcion.textContent = r.descripcion;
+
+    const acciones = document.createElement("div");
+    acciones.className = "card-actions";
+
+    const enlace = document.createElement("a");
+    enlace.href = r.url;
+    enlace.target = "_blank";
+    enlace.rel = "noopener noreferrer";
+    enlace.textContent = "Abrir recurso ↗️";
+
+    acciones.appendChild(enlace);
+
+    if(r.personalizado){
+      const eliminar = document.createElement("button");
+      eliminar.className = "delete";
+      eliminar.type = "button";
+      eliminar.textContent = "Eliminar";
+      eliminar.addEventListener("click", () => eliminarRecurso(r.id));
+      acciones.appendChild(eliminar);
+    }
+
+    tarjeta.append(icono,etiqueta,titulo,descripcion,acciones);
+    lista.appendChild(tarjeta);
+  });
+
+  actualizarTotal();
+}
+
+function guardarDatos(){
+  localStorage.setItem("bibliotecaTIC",JSON.stringify(personalizados));
+}
+
+function eliminarRecurso(id){
+  if(!confirm("¿Deseas eliminar este recurso?")) return;
+
+  personalizados = personalizados.filter(r => r.id !== id);
+  recursos = [...iniciales,...personalizados];
+
+  try {
+    guardarDatos();
+    mostrarRecursos();
+  } catch(e) {
+    alert("No se pudo actualizar el almacenamiento.");
+  }
+}
+
+document.getElementById("formulario").addEventListener("submit",function(e){
+  e.preventDefault();
+
+  const nombre = document.getElementById("nombre").value.trim();
+  const categoria = document.getElementById("categoria").value;
+  const descripcion = document.getElementById("descripcion").value.trim();
+  const url = document.getElementById("url").value.trim();
+  const mensaje = document.getElementById("mensaje");
+
+  let direccion;
+
+  try {
+    direccion = new URL(url);
+  } catch(e) {
+    mensaje.textContent = "Escribe una dirección web válida.";
+    return;
+  }
+
+  if(!["http:","https:"].includes(direccion.protocol)){
+    mensaje.textContent = "El enlace debe comenzar con http o https.";
+    return;
+  }
+
+  const nuevo = {
+    id:Date.now().toString(),
+    nombre,
+    categoria,
+    descripcion,
+    url:direccion.href,
+    icono:"📘",
+    personalizado:true
+  };
+
+  personalizados.push(nuevo);
+  recursos.push(nuevo);
+
+  try {
+    guardarDatos();
+    mostrarRecursos();
+    this.reset();
+    mensaje.textContent = "¡Recurso guardado correctamente!";
+  } catch(e) {
+    personalizados.pop();
+    recursos = [...iniciales,...personalizados];
+    mensaje.textContent = "No se pudo guardar. Revisa el almacenamiento del navegador.";
+    mostrarRecursos();
+  }
+});
+
+mostrarRecursos();
+</script>
+
+</body>
+</html>
